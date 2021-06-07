@@ -1,20 +1,19 @@
+# Show Current Date and Time on a live video
+
 import cv2
+import datetime
 
 cap=cv2.VideoCapture(0)
-
-print(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-print(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-# setting the camera properties
-cap.set(cv2.CAP_PROP_FRAME_WIDTH,1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT,720)
-
-print(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-print(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 while cap.isOpened():
     ret,frame=cap.read()
     if ret:
+
+        text=str(datetime.datetime.now())
+        font=cv2.FONT_HERSHEY_SIMPLEX
+        # assiging means Writing
+        frame=cv2.putText(frame,text,(10,100),font,1,(255,255,0),3)
+
         cv2.imshow('Window',frame)
 
         keyPressed=cv2.waitKey(1)
